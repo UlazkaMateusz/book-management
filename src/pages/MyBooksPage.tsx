@@ -23,8 +23,8 @@ export const MyBooksPage = () => {
         onSubmit={onSubmit}
       ></BookFilter>
       <div className="d-flex gap-3 mt-5">
-        {favouriteBooks.map((identifier) => (
-          <BookCard bookIdentifier={identifier}></BookCard>
+        {favouriteBooks.map((bookKey) => (
+          <BookCard key={bookKey} bookKey={bookKey}></BookCard>
         ))}
       </div>
     </>

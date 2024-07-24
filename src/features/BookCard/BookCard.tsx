@@ -1,29 +1,24 @@
-import { Card, Container, Placeholder } from "react-bootstrap";
+import { Card, Placeholder } from "react-bootstrap";
 import { useBookDetailsQuery } from "../../api/BookApi";
-import { BookDetailsRecordsData } from "../../types/BookDetailsResponse";
-import { BookIdentifier } from "../../types/BookSearchResponse";
 import { useState } from "react";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
 
 export interface BookCardParams {
-  bookIdentifier: BookIdentifier;
+  bookKey: string;
 }
 
-export const BookCard = ({ bookIdentifier }: BookCardParams) => {
-  const { isLoading, data } = useBookDetailsQuery({ ...bookIdentifier });
+export const BookCard = ({ bookKey }: BookCardParams) => {
+  const { isLoading, data } = useBookDetailsQuery(bookKey);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const navigate = useNavigate();
-
-  const recordData: BookDetailsRecordsData | undefined =
-    data?.records[Object.keys(data?.records)[0]]?.data;
 
   const handleOnImageLoad = () => {
     setIsImageLoading(false);
   };
 
   const handleOnClick = () => {
-    navigate(`/${bookIdentifier.idType}/${bookIdentifier.id}`);
+    navigate(bookKey);
   };
 
   return (
@@ -37,19 +32,21 @@ export const BookCard = ({ bookIdentifier }: BookCardParams) => {
       >
         <CenteredSpinner></CenteredSpinner>
       </div>
-      <Card.Img
-        style={{ display: isImageLoading ? "none" : "block" }}
-        variant="top"
-        src={recordData?.cover.medium}
-        onLoad={handleOnImageLoad}
-      />
+      {data && (
+        <Card.Img
+          style={{ display: isImageLoading ? "none" : "block" }}
+          variant="top"
+          src={`https://covers.openlibrary.org/b/id/${data.covers[0]}-M.jpg`}
+          onLoad={handleOnImageLoad}
+        />
+      )}
       <Card.Body>
         {isLoading ? (
           <Placeholder as={Card.Title} animation="glow">
             <Placeholder xs={12}></Placeholder>
           </Placeholder>
         ) : (
-          <Card.Title>{recordData?.title}</Card.Title>
+          <Card.Title>{data?.title}</Card.Title>
         )}
       </Card.Body>
     </Card>

@@ -14,12 +14,16 @@ export const router = createBrowserRouter([
         Component: SearchPage,
       },
       {
-        path: ":bookKey",
+        path: "works/:bookKeyPart",
         Component: BookDetailPage,
       },
       {
         path: "my-books",
         Component: MyBooksPage,
+      },
+      {
+        path: "*",
+        element: "Page not found",
       },
     ],
   },

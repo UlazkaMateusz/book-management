@@ -1,10 +1,11 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { BookDetailsRecordsData } from "../../types/BookDetailsResponse";
+import { Button, Col, Container, Placeholder, Row } from "react-bootstrap";
+import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
+import { useGetAuthorsDetails } from "./useGetAuthorsDetails";
 
 export interface BookDetailsParams {
   imageLoading: boolean;
-  recordData: BookDetailsRecordsData;
+  bookDetailsResponse: BookDetailsResponse;
   handleImageOnLoad: () => void;
   isFavourite: boolean;
   handleFavouriteButton: () => void;
@@ -12,21 +13,29 @@ export interface BookDetailsParams {
 
 export const BookDetails = ({
   imageLoading,
-  recordData,
+  bookDetailsResponse,
   handleImageOnLoad,
   isFavourite,
   handleFavouriteButton,
 }: BookDetailsParams) => {
+  const authors = useGetAuthorsDetails(bookDetailsResponse);
+
   return (
     <Container>
       <Row>
         <Col>
-          <Row className="m-1">Title: {recordData.title}</Row>
+          <Row className="m-1">Title: {bookDetailsResponse.title}</Row>
           <Row className="m-1">
             Authors:{" "}
-            {recordData.authors.map((author) => author.name).join(", ")}
+            {authors.length ? (
+              authors.map((a) => a.name).join(", ")
+            ) : (
+              <Placeholder xs={6}></Placeholder>
+            )}
           </Row>
-          <Row className="m-1">Publish date: {recordData.publish_date}</Row>
+          <Row className="m-1">
+            Publish date: {bookDetailsResponse.first_publish_date}
+          </Row>
           <Row className="m-1">
             <Button onClick={handleFavouriteButton}>
               {isFavourite ? "Remove from favourites" : "Add to favourites"}
@@ -34,14 +43,14 @@ export const BookDetails = ({
           </Row>
         </Col>
         <Col>
-          {recordData.cover && (
+          {bookDetailsResponse.covers[0] && (
             <>
               <div style={{ display: imageLoading ? "block" : "none" }}>
                 <CenteredSpinner></CenteredSpinner>
               </div>
               <img
                 style={{ display: imageLoading ? "none" : "block" }}
-                src={recordData.cover.medium}
+                src={`https://covers.openlibrary.org/b/id/${bookDetailsResponse.covers[0]}-M.jpg`}
                 onLoad={handleImageOnLoad}
               />
             </>

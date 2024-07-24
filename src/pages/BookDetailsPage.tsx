@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useBookDetailsQuery } from "../api/BookApi";
-import { BookDetailsRecordsData } from "../types/BookDetailsResponse";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { CenteredSpinner } from "../shared/CenteredSpinner";
@@ -11,21 +10,19 @@ import { useFavouriteBooks } from "../hooks/useFavouriteBooks";
 export const BookDetailPage = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const navigate = useNavigate();
-  const { bookKey } = useParams();
+  const { bookKeyPart } = useParams();
   const [favouriteBooks, setFavouriteBooks] = useFavouriteBooks();
 
-  if (!idType || !id) {
-    return "Error";
+  if (!bookKeyPart) {
+    return "Error: bookKeyPart is null";
   }
 
+  const bookKey = `/works/${bookKeyPart}`;
   const [isFavourite, setIsFavourite] = useState(
-    () => !!favouriteBooks.find((b) => b.key == bookKey)
+    () => !!favouriteBooks.find((key) => key == bookKey)
   );
 
-  const { data, isLoading } = useBookDetailsQuery({ idType, id });
-
-  const recordData: BookDetailsRecordsData | undefined =
-    data?.records[Object.keys(data?.records)[0]]?.data;
+  const { data, isLoading } = useBookDetailsQuery(bookKey);
 
   const handleOnClick = () => {
     navigate("/");
@@ -37,12 +34,10 @@ export const BookDetailPage = () => {
 
   const handleFavouriteButton = () => {
     if (isFavourite) {
-      setFavouriteBooks(
-        favouriteBooks.filter((b) => !(b.id == id && b.idType == idType))
-      );
+      setFavouriteBooks(favouriteBooks.filter((key) => key !== bookKey));
       setIsFavourite(false);
     } else {
-      const newFavouriteBooks = [...favouriteBooks, { id, idType }];
+      const newFavouriteBooks = [...favouriteBooks, bookKey];
       setFavouriteBooks(newFavouriteBooks);
       setIsFavourite(true);
     }
@@ -52,23 +47,20 @@ export const BookDetailPage = () => {
     return <CenteredSpinner></CenteredSpinner>;
   }
 
-  if (!recordData) {
+  if (!data) {
     return "Error";
   }
-
-  console.log(recordData);
-  console.log(recordData.key);
 
   return (
     <>
       <BookDetails
         imageLoading={imageLoading}
-        recordData={recordData}
+        bookDetailsResponse={data}
         handleImageOnLoad={handleImageOnLoad}
         isFavourite={isFavourite}
         handleFavouriteButton={handleFavouriteButton}
       ></BookDetails>
-      <PersonalRating bookKey={recordData.key}></PersonalRating>
+      <PersonalRating bookKey={data.key}></PersonalRating>
       <Button variant="secondary" onClick={handleOnClick}>
         Go to search
       </Button>

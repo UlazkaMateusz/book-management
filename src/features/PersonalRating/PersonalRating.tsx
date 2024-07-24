@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useBookCollection } from "../../hooks/useBookCollection";
+import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 
 interface FormValues {
   notes: string;
@@ -9,20 +10,21 @@ interface FormValues {
 }
 
 export interface PersonalRatingParams {
-  bookKey?: string;
+  bookDetailsResponse: BookDetailsResponse;
 }
 
-export const PersonalRating = ({ bookKey }: PersonalRatingParams) => {
+export const PersonalRating = ({
+  bookDetailsResponse,
+}: PersonalRatingParams) => {
   const [books, setBooks] = useBookCollection();
 
-  console.log(bookKey);
   let initialValues: FormValues = {
     notes: "",
     readingProgress: "Unread",
     rating: "1",
   };
 
-  const savedBook = books.find((b) => b.key == bookKey);
+  const savedBook = books.find((b) => b.key == bookDetailsResponse.key);
   if (savedBook) {
     initialValues = {
       ...savedBook,
@@ -30,13 +32,15 @@ export const PersonalRating = ({ bookKey }: PersonalRatingParams) => {
   }
 
   const onSubmit = (data: FormValues) => {
-    if (!bookKey) {
+    if (!bookDetailsResponse.key) {
       throw new Error("key is undefinded on sumbit");
     }
 
-    let newBooks = books.filter((b) => b.key != bookKey);
+    let newBooks = books.filter((b) => b.key != bookDetailsResponse.key);
     newBooks.push({
-      key: bookKey,
+      key: bookDetailsResponse.key,
+      authors: bookDetailsResponse.authors.map((book) => book.author.key),
+      title: bookDetailsResponse.title,
       ...data,
     });
 

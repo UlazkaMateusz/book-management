@@ -1,15 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BookSearchResponse } from "../types/BookSearchResponse";
-import { BookDetails } from "../types/BookDetailsResponse";
+import { BookDetailsResponse } from "../types/BookDetailsResponse";
+import { AuthorDetailsResponse } from "../types/AuthorDetailsResponse";
 
 interface SearchBooksQuery {
   title?: string;
   author?: string;
   year?: number;
-}
-
-interface BookDetailsQuery {
-  bookKey: string;
 }
 
 const corsAnywhereProxy = "http://localhost:8080";
@@ -37,10 +34,18 @@ export const bookApi = createApi({
       },
     }),
 
-    bookDetails: builder.query<BookDetails, BookDetailsQuery>({
-      query: ({ bookKey }) => `${bookKey}.json`,
+    bookDetails: builder.query<BookDetailsResponse, string>({
+      query: (bookKey) => `${bookKey}.json`,
+    }),
+
+    authorDetails: builder.query<AuthorDetailsResponse, string>({
+      query: (authorKey) => `${authorKey}.json`,
     }),
   }),
 });
 
-export const { useSearchBooksMutation, useBookDetailsQuery } = bookApi;
+export const {
+  useSearchBooksMutation,
+  useBookDetailsQuery,
+  useLazyAuthorDetailsQuery,
+} = bookApi;

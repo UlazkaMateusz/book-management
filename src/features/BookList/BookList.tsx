@@ -24,8 +24,7 @@ export const BookList = ({ isLoading, data }: BookListParams) => {
   }
 
   const handleOnClick = (book: Book) => {
-    const ident = getBookIdentifier(book);
-    navigate(`/${ident.idType}/${ident.id}`);
+    navigate(book.key);
   };
 
   return (
