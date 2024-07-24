@@ -3,7 +3,7 @@ import { BookStorageType } from "../types/BookStorageType";
 
 const booksCollectionLocalStorageKey = "booksCollection";
 
-export const useBookCollection = () => {
+export const useBooksCollection = () => {
   const [books, setBooks] = useState(() => {
     const books = localStorage.getItem(booksCollectionLocalStorageKey);
 

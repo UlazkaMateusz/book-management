@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookIdentifier } from "../types/BookSearchResponse";
+import { FavouriteBookStorageType } from "../types/FavouriteBookStorageType";
 
 const favouriteBooksLocalStorageKey = "favouriteBooks";
 
@@ -9,7 +9,7 @@ export const useFavouriteBooks = () => {
 
     // @ts-ignore JSON.parse properly handles null. If null is passed then null is returned
     const initialValue = JSON.parse(books);
-    return (initialValue || []) as string[];
+    return (initialValue || []) as FavouriteBookStorageType[];
   });
 
   useEffect(() => {

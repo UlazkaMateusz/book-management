@@ -1,9 +1,5 @@
 import { Table } from "react-bootstrap";
-import {
-  Book,
-  BookSearchResponse,
-  getBookIdentifier,
-} from "../../types/BookSearchResponse";
+import { Book, BookSearchResponse } from "../../types/BookSearchResponse";
 import { useNavigate } from "react-router-dom";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
 

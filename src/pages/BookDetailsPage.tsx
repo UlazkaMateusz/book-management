@@ -6,12 +6,15 @@ import { CenteredSpinner } from "../shared/CenteredSpinner";
 import { BookDetails } from "../features/BookDetails";
 import { PersonalRating } from "../features/PersonalRating/PersonalRating";
 import { useFavouriteBooks } from "../hooks/useFavouriteBooks";
+import { FavouriteBookStorageType } from "../types/FavouriteBookStorageType";
+import { useGetAuthorsDetails } from "../features/BookDetails/useGetAuthorsDetails";
 
 export const BookDetailPage = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const navigate = useNavigate();
   const { bookKeyPart } = useParams();
   const [favouriteBooks, setFavouriteBooks] = useFavouriteBooks();
+  const [dispatch, authors, areAuthorsLoading] = useGetAuthorsDetails();
 
   if (!bookKeyPart) {
     return "Error: bookKeyPart is null";
@@ -19,10 +22,20 @@ export const BookDetailPage = () => {
 
   const bookKey = `/works/${bookKeyPart}`;
   const [isFavourite, setIsFavourite] = useState(
-    () => !!favouriteBooks.find((key) => key == bookKey)
+    () => !!favouriteBooks.find((favouriteBook) => favouriteBook.key == bookKey)
   );
 
   const { data, isLoading } = useBookDetailsQuery(bookKey);
+
+  if (isLoading) {
+    return <CenteredSpinner></CenteredSpinner>;
+  }
+
+  if (!data) {
+    return "Error";
+  }
+
+  dispatch(data);
 
   const handleOnClick = () => {
     navigate("/");
@@ -34,22 +47,23 @@ export const BookDetailPage = () => {
 
   const handleFavouriteButton = () => {
     if (isFavourite) {
-      setFavouriteBooks(favouriteBooks.filter((key) => key !== bookKey));
+      setFavouriteBooks(
+        favouriteBooks.filter((favouriteBook) => favouriteBook.key !== bookKey)
+      );
       setIsFavourite(false);
     } else {
-      const newFavouriteBooks = [...favouriteBooks, bookKey];
+      const newFavouriteBooks = [
+        ...favouriteBooks,
+        {
+          key: bookKey,
+          title: data.title,
+          authors: authors.map((a) => a.name),
+        } as FavouriteBookStorageType,
+      ];
       setFavouriteBooks(newFavouriteBooks);
       setIsFavourite(true);
     }
   };
-
-  if (isLoading) {
-    return <CenteredSpinner></CenteredSpinner>;
-  }
-
-  if (!data) {
-    return "Error";
-  }
 
   return (
     <>
@@ -59,8 +73,10 @@ export const BookDetailPage = () => {
         handleImageOnLoad={handleImageOnLoad}
         isFavourite={isFavourite}
         handleFavouriteButton={handleFavouriteButton}
+        areAuthorsLoading={areAuthorsLoading}
+        authors={authors}
       ></BookDetails>
-      <PersonalRating bookKey={data.key}></PersonalRating>
+      <PersonalRating bookDetailsResponse={data}></PersonalRating>
       <Button variant="secondary" onClick={handleOnClick}>
         Go to search
       </Button>

@@ -1,7 +1,8 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { useBookCollection } from "../../hooks/useBookCollection";
+import { useBooksCollection } from "../../hooks/useBooksCollection";
 import { BookDetailsResponse } from "../../types/BookDetailsResponse";
+import { AuthorDetailsResponse } from "../../types/AuthorDetailsResponse";
 
 interface FormValues {
   notes: string;
@@ -11,12 +12,14 @@ interface FormValues {
 
 export interface PersonalRatingParams {
   bookDetailsResponse: BookDetailsResponse;
+  authors: AuthorDetailsResponse[];
+  areAuthorsLoading: boolean;
 }
 
 export const PersonalRating = ({
   bookDetailsResponse,
 }: PersonalRatingParams) => {
-  const [books, setBooks] = useBookCollection();
+  const [books, setBooks] = useBooksCollection();
 
   let initialValues: FormValues = {
     notes: "",
@@ -39,8 +42,6 @@ export const PersonalRating = ({
     let newBooks = books.filter((b) => b.key != bookDetailsResponse.key);
     newBooks.push({
       key: bookDetailsResponse.key,
-      authors: bookDetailsResponse.authors.map((book) => book.author.key),
-      title: bookDetailsResponse.title,
       ...data,
     });
 

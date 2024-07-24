@@ -1,13 +1,15 @@
 import { Button, Col, Container, Placeholder, Row } from "react-bootstrap";
 import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
-import { useGetAuthorsDetails } from "./useGetAuthorsDetails";
+import { AuthorDetailsResponse } from "../../types/AuthorDetailsResponse";
 
 export interface BookDetailsParams {
   imageLoading: boolean;
   bookDetailsResponse: BookDetailsResponse;
   handleImageOnLoad: () => void;
   isFavourite: boolean;
+  authors: AuthorDetailsResponse[];
+  areAuthorsLoading: boolean;
   handleFavouriteButton: () => void;
 }
 
@@ -17,9 +19,9 @@ export const BookDetails = ({
   handleImageOnLoad,
   isFavourite,
   handleFavouriteButton,
+  authors,
+  areAuthorsLoading,
 }: BookDetailsParams) => {
-  const authors = useGetAuthorsDetails(bookDetailsResponse);
-
   return (
     <Container>
       <Row>
@@ -37,7 +39,10 @@ export const BookDetails = ({
             Publish date: {bookDetailsResponse.first_publish_date}
           </Row>
           <Row className="m-1">
-            <Button onClick={handleFavouriteButton}>
+            <Button
+              onClick={handleFavouriteButton}
+              disabled={areAuthorsLoading}
+            >
               {isFavourite ? "Remove from favourites" : "Add to favourites"}
             </Button>
           </Row>

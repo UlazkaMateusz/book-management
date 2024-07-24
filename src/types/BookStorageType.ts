@@ -3,6 +3,4 @@ export interface BookStorageType {
   readingProgress: "Unread" | "Reading" | "Finished";
   rating: "1" | "2" | "3" | "4" | "5";
   key: string;
-  title: string;
-  authors: string[];
 }
