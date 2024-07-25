@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { Book, BookSearchResponse } from "../../types/BookSearchResponse";
-import { useNavigate } from "react-router-dom";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
+import { useNavigate } from "react-router-dom";
 
 export interface BookListParams {
   isLoading: boolean;
@@ -16,7 +16,7 @@ export const BookList = ({ isLoading, data }: BookListParams) => {
   }
 
   if (!data) {
-    return <div>No data</div>;
+    return <div></div>;
   }
 
   const handleOnClick = (book: Book) => {
@@ -39,7 +39,11 @@ export const BookList = ({ isLoading, data }: BookListParams) => {
         </thead>
         <tbody>
           {data.docs.map((book, i) => (
-            <tr key={book.key} onClick={() => handleOnClick(book)}>
+            <tr
+              key={book.key}
+              onClick={() => handleOnClick(book)}
+              style={{ cursor: "pointer" }}
+            >
               <td>{i + 1}</td>
               <td>{book.author_name}</td>
               <td>{book.title}</td>

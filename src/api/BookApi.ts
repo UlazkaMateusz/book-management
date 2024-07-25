@@ -27,7 +27,7 @@ export const bookApi = createApi({
           urlParts.push(`author=${author}`);
         }
         if (year) {
-          urlParts.push(`year=${year}`);
+          urlParts.push(`q=first_publish_year:[${year} TO ${year}]`);
         }
 
         return "search.json?" + urlParts.join("&");

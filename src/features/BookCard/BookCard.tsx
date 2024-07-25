@@ -21,8 +21,12 @@ export const BookCard = ({ bookKey }: BookCardParams) => {
     navigate(bookKey);
   };
 
+  const image_src = data?.covers?.length
+    ? `https://covers.openlibrary.org/b/id/${data.covers[0]}-M.jpg`
+    : "https://placehold.co/400x600.png";
+
   return (
-    <Card style={{ width: "18rem" }} onClick={handleOnClick}>
+    <Card style={{ width: "18rem", cursor: "pointer" }} onClick={handleOnClick}>
       <div
         style={{
           display: isImageLoading ? "flex" : "none",
@@ -32,14 +36,12 @@ export const BookCard = ({ bookKey }: BookCardParams) => {
       >
         <CenteredSpinner></CenteredSpinner>
       </div>
-      {data && (
-        <Card.Img
-          style={{ display: isImageLoading ? "none" : "block" }}
-          variant="top"
-          src={`https://covers.openlibrary.org/b/id/${data.covers[0]}-M.jpg`}
-          onLoad={handleOnImageLoad}
-        />
-      )}
+      <Card.Img
+        style={{ display: isImageLoading ? "none" : "block" }}
+        variant="top"
+        src={isLoading ? "" : image_src}
+        onLoad={handleOnImageLoad}
+      />
       <Card.Body>
         {isLoading ? (
           <Placeholder as={Card.Title} animation="glow">

@@ -2,18 +2,16 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useBooksCollection } from "../../hooks/useBooksCollection";
 import { BookDetailsResponse } from "../../types/BookDetailsResponse";
-import { AuthorDetailsResponse } from "../../types/AuthorDetailsResponse";
+import { PersonalRatingSchema } from "./PersonalRatingSchema";
 
 interface FormValues {
   notes: string;
   readingProgress: "Unread" | "Reading" | "Finished";
-  rating: "1" | "2" | "3" | "4" | "5";
+  rating: "" | "1" | "2" | "3" | "4" | "5";
 }
 
 export interface PersonalRatingParams {
   bookDetailsResponse: BookDetailsResponse;
-  authors: AuthorDetailsResponse[];
-  areAuthorsLoading: boolean;
 }
 
 export const PersonalRating = ({
@@ -21,18 +19,14 @@ export const PersonalRating = ({
 }: PersonalRatingParams) => {
   const [books, setBooks] = useBooksCollection();
 
-  let initialValues: FormValues = {
-    notes: "",
-    readingProgress: "Unread",
-    rating: "1",
-  };
-
   const savedBook = books.find((b) => b.key == bookDetailsResponse.key);
-  if (savedBook) {
-    initialValues = {
-      ...savedBook,
-    };
-  }
+  let initialValues: FormValues = savedBook
+    ? savedBook
+    : {
+        notes: "",
+        readingProgress: "Unread",
+        rating: "",
+      };
 
   const onSubmit = (data: FormValues) => {
     if (!bookDetailsResponse.key) {
@@ -50,7 +44,11 @@ export const PersonalRating = ({
 
   return (
     <>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={PersonalRatingSchema}
+      >
         {({ values, errors, handleSubmit, handleChange }) => (
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mt-2">
@@ -60,7 +58,11 @@ export const PersonalRating = ({
                 name="notes"
                 onChange={handleChange}
                 value={values.notes}
+                isInvalid={!!errors.notes}
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.notes}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label>Reading progress</Form.Label>
@@ -68,11 +70,15 @@ export const PersonalRating = ({
                 name="readingProgress"
                 onChange={handleChange}
                 value={values.readingProgress}
+                isInvalid={!!errors.readingProgress}
               >
                 <option>Unread</option>
                 <option>Reading</option>
                 <option>Finished</option>
               </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                {errors.readingProgress}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mt-2">
               <Form.Label>My rating</Form.Label>
@@ -80,13 +86,20 @@ export const PersonalRating = ({
                 name="rating"
                 onChange={handleChange}
                 value={values.rating}
+                isInvalid={!!errors.rating}
               >
+                <option value="" disabled hidden>
+                  Choose rating
+                </option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
               </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                {errors.rating}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <div className="d-flex justify-content-end mt-3">

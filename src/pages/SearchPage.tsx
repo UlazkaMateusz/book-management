@@ -1,28 +1,30 @@
-import { useSearchBooksMutation } from "../api/BookApi";
 import { BookList } from "../features/BookList";
 import { BookSearchBar, BookSearchBarValues } from "../features/BookSearchBar";
-
-const initialValues = {
-  title: "",
-  author: "",
-  year: undefined,
-} as BookSearchBarValues;
+import { useSearchBooks } from "../hooks/useSearchBooks";
 
 export const SearchPage = () => {
-  const [fetchSearchData, { isLoading, data, error, status }] =
-    useSearchBooksMutation();
+  const { data, error, isLoading, setValues, status, getValues } =
+    useSearchBooks();
 
   const onSubmit = (values: BookSearchBarValues) => {
-    fetchSearchData({
-      author: values.author,
-      title: values.title,
-      year: values.year ? parseInt(values.year, 10) : undefined,
-    });
+    let newValues = Object.entries(values).filter(([, value]) => !!value) as [
+      string,
+      string
+    ][];
+    setValues(newValues);
   };
 
   if (error) {
-    console.log(error);
+    console.error(error);
   }
+
+  const values = getValues();
+
+  const initialValues = {
+    title: values.title ?? "",
+    author: values.author ?? "",
+    year: values.year ? values.year.toString() : "",
+  };
 
   return (
     <>

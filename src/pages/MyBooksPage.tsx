@@ -64,7 +64,7 @@ export const MyBooksPage = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
       ></BookFilter>
-      <div className="d-flex gap-3 mt-5">
+      <div className="d-flex gap-3 mt-5 flex-wrap">
         {books.map((favouriteBook) => (
           <BookCard
             key={favouriteBook.key}

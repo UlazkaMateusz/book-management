@@ -2,26 +2,55 @@ import { Button, Col, Container, Placeholder, Row } from "react-bootstrap";
 import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
 import { AuthorDetailsResponse } from "../../types/AuthorDetailsResponse";
+import { useMemo, useState } from "react";
+import { useFavouriteBooks } from "../../hooks/useFavouriteBooks";
 
 export interface BookDetailsParams {
-  imageLoading: boolean;
   bookDetailsResponse: BookDetailsResponse;
-  handleImageOnLoad: () => void;
-  isFavourite: boolean;
   authors: AuthorDetailsResponse[];
   areAuthorsLoading: boolean;
-  handleFavouriteButton: () => void;
 }
 
 export const BookDetails = ({
-  imageLoading,
   bookDetailsResponse,
-  handleImageOnLoad,
-  isFavourite,
-  handleFavouriteButton,
   authors,
   areAuthorsLoading,
 }: BookDetailsParams) => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [favouriteBooks, setFavouriteBooks] = useFavouriteBooks();
+
+  const handleImageOnLoad = () => {
+    setImageLoading(false);
+  };
+
+  const isFavourite = useMemo(
+    () =>
+      !!favouriteBooks.find(
+        (favouriteBook) => favouriteBook.key == bookDetailsResponse.key
+      ),
+    [favouriteBooks]
+  );
+
+  const handleFavouriteButton = () => {
+    if (isFavourite) {
+      setFavouriteBooks(
+        favouriteBooks.filter(
+          (favouriteBook) => favouriteBook.key !== bookDetailsResponse.key
+        )
+      );
+    } else {
+      const newFavouriteBooks = [
+        ...favouriteBooks,
+        {
+          key: bookDetailsResponse.key,
+          title: bookDetailsResponse.title,
+          authors: authors.map((a) => a.name),
+        },
+      ];
+      setFavouriteBooks(newFavouriteBooks);
+    }
+  };
+
   return (
     <Container>
       <Row>
@@ -48,7 +77,7 @@ export const BookDetails = ({
           </Row>
         </Col>
         <Col>
-          {bookDetailsResponse.covers[0] && (
+          {bookDetailsResponse.covers?.length && (
             <>
               <div style={{ display: imageLoading ? "block" : "none" }}>
                 <CenteredSpinner></CenteredSpinner>

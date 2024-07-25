@@ -15,7 +15,7 @@ export interface BookFilterValues {
 export const BookFilter = ({ initialValues, onSubmit }: BookFilterParams) => {
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      {({ values, errors, handleSubmit, handleChange }) => (
+      {({ values, handleSubmit, handleChange }) => (
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mt-3">
             <Form.Label htmlFor="title">Title</Form.Label>
