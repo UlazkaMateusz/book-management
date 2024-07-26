@@ -6,6 +6,7 @@ import { BookDetails } from "../features/BookDetails";
 import { PersonalRating } from "../features/PersonalRating/PersonalRating";
 import { useGetAuthorsDetails } from "../hooks/useGetAuthorsDetails";
 import { RenderingError } from "../types/RenderingError";
+import { useEffect } from "react";
 
 export const BookDetailPage = () => {
   const { bookKeyPart } = useParams();
@@ -15,12 +16,14 @@ export const BookDetailPage = () => {
     isLoading: areAuthorsLoading,
   } = useGetAuthorsDetails();
 
-  if (!bookKeyPart) {
-    throw new RenderingError("Invalid key", 404);
-  }
-
   const bookKey = `/works/${bookKeyPart}`;
   const { data, error, isLoading } = useBookDetailsQuery(bookKey);
+
+  useEffect(() => {
+    if (data) {
+      trigger(data);
+    }
+  }, [data, trigger]);
 
   if (isLoading) {
     return <CenteredSpinner></CenteredSpinner>;
@@ -33,8 +36,6 @@ export const BookDetailPage = () => {
   if (!data) {
     throw new RenderingError("Data is missing", 404);
   }
-
-  trigger(data);
 
   return (
     <>

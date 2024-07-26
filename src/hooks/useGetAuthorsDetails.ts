@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { BookDetailsResponse } from "../types/BookDetailsResponse";
 import { AuthorDetailsResponse } from "../types/AuthorDetailsResponse";
 import { useLazyAuthorDetailsQuery } from "../api/BookApi";
@@ -6,19 +6,12 @@ import { useLazyAuthorDetailsQuery } from "../api/BookApi";
 export const useGetAuthorsDetails = () => {
   const [authors, setAuthors] = useState([] as AuthorDetailsResponse[]);
   const [isLoading, setIsLoading] = useState(true);
-  const [request, setRequest] = useState(
-    undefined as BookDetailsResponse | undefined
-  );
   const [trigger] = useLazyAuthorDetailsQuery();
 
-  useEffect(() => {
-    const fetchAuthorsData = async () => {
-      if (!request) {
-        return;
-      }
-
+  const getAuthorDetailsTrigger = useCallback(
+    async (bookDetailsResponse: BookDetailsResponse) => {
       const authorsDetails = [];
-      for (const author of request.authors) {
+      for (const author of bookDetailsResponse.authors) {
         const { data, error } = await trigger(author.author.key);
 
         if (error) {
@@ -32,18 +25,9 @@ export const useGetAuthorsDetails = () => {
 
       setAuthors(authorsDetails);
       setIsLoading(false);
-    };
-
-    fetchAuthorsData().catch(console.error);
-  }, [request, trigger]);
-
-  const getAuthorDetailsTrigger = (
-    bookDetailsResponse: BookDetailsResponse
-  ) => {
-    if (!request) {
-      setRequest(bookDetailsResponse);
-    }
-  };
+    },
+    [trigger]
+  );
 
   return { trigger: getAuthorDetailsTrigger, authors, isLoading };
 };
