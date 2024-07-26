@@ -41,7 +41,7 @@ export const BookSearchBar = ({
               {errors.title}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group>
+          <Form.Group className="mt-3">
             <Form.Label htmlFor="title">Author</Form.Label>
             <Form.Control
               type="text"
@@ -54,7 +54,7 @@ export const BookSearchBar = ({
               {errors.author}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group>
+          <Form.Group className="mt-3">
             <Form.Label htmlFor="year">Year of publication</Form.Label>
             <Form.Control
               type="number"
@@ -76,7 +76,11 @@ export const BookSearchBar = ({
               {errors.fieldsRequired}
             </div>
           )}
-          <Button type="submit" disabled={status === "pending"}>
+          <Button
+            type="submit"
+            disabled={status === "pending"}
+            className="mt-3"
+          >
             Search
           </Button>
         </Form>

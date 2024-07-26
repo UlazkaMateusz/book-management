@@ -1,6 +1,6 @@
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
 import { useSearchBooksMutation } from "../api/BookApi";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export const useSearchBooks = () => {
   const [fetchSearchData, { isLoading, data, error, status }] =
@@ -8,7 +8,7 @@ export const useSearchBooks = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const getSearchParamValues = () => {
+  const getSearchParamValues = useCallback(() => {
     const author = searchParams.get("author") ?? undefined;
     const title = searchParams.get("title") ?? undefined;
 
@@ -20,7 +20,7 @@ export const useSearchBooks = () => {
       title,
       year,
     };
-  };
+  }, [searchParams]);
 
   useEffect(() => {
     const values = getSearchParamValues();
@@ -32,7 +32,7 @@ export const useSearchBooks = () => {
         year: values.year,
       });
     }
-  }, [searchParams]);
+  }, [searchParams, fetchSearchData, getSearchParamValues]);
 
   return {
     getValues: getSearchParamValues,

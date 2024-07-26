@@ -20,7 +20,7 @@ export const PersonalRating = ({
   const [books, setBooks] = useBooksCollection();
 
   const savedBook = books.find((b) => b.key == bookDetailsResponse.key);
-  let initialValues: FormValues = savedBook
+  const initialValues: FormValues = savedBook
     ? savedBook
     : {
         notes: "",
@@ -33,7 +33,7 @@ export const PersonalRating = ({
       throw new Error("key is undefinded on sumbit");
     }
 
-    let newBooks = books.filter((b) => b.key != bookDetailsResponse.key);
+    const newBooks = books.filter((b) => b.key != bookDetailsResponse.key);
     newBooks.push({
       key: bookDetailsResponse.key,
       ...data,

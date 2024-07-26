@@ -9,16 +9,15 @@ interface SearchBooksQuery {
   year?: number;
 }
 
-const corsAnywhereProxy = "http://localhost:8080";
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${corsAnywhereProxy}/https://openlibrary.org`,
+    baseUrl: `https://openlibrary.org`,
   }),
   endpoints: (builder) => ({
     searchBooks: builder.mutation<BookSearchResponse, SearchBooksQuery>({
       query: ({ title, author, year }) => {
-        let urlParts = [];
+        const urlParts = [];
 
         if (title) {
           urlParts.push(`title=${title}`);

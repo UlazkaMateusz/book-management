@@ -5,6 +5,7 @@ import { CenteredSpinner } from "../shared/CenteredSpinner";
 import { BookDetails } from "../features/BookDetails";
 import { PersonalRating } from "../features/PersonalRating/PersonalRating";
 import { useGetAuthorsDetails } from "../hooks/useGetAuthorsDetails";
+import { RenderingError } from "../types/RenderingError";
 
 export const BookDetailPage = () => {
   const { bookKeyPart } = useParams();
@@ -15,7 +16,7 @@ export const BookDetailPage = () => {
   } = useGetAuthorsDetails();
 
   if (!bookKeyPart) {
-    return "Error: bookKeyPart is null";
+    throw new RenderingError("Invalid key", 404);
   }
 
   const bookKey = `/works/${bookKeyPart}`;
@@ -26,10 +27,11 @@ export const BookDetailPage = () => {
   }
 
   if (error) {
-    return "Error: error wass returned";
+    throw new RenderingError("Failed to fetch data", 404);
   }
+
   if (!data) {
-    return "Error: no data";
+    throw new RenderingError("Data is missing", 404);
   }
 
   trigger(data);

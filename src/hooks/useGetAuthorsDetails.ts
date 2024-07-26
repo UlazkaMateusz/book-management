@@ -17,7 +17,7 @@ export const useGetAuthorsDetails = () => {
         return;
       }
 
-      let authorsDetails = [];
+      const authorsDetails = [];
       for (const author of request.authors) {
         const { data, error } = await trigger(author.author.key);
 
@@ -35,7 +35,7 @@ export const useGetAuthorsDetails = () => {
     };
 
     fetchAuthorsData().catch(console.error);
-  }, [request]);
+  }, [request, trigger]);
 
   const getAuthorDetailsTrigger = (
     bookDetailsResponse: BookDetailsResponse

@@ -1,5 +1,7 @@
 import { Nav, Navbar } from "react-bootstrap";
+import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
+import { FallbackRender } from "../features/FallbackRender";
 
 export const PageTemplate = () => {
   return (
@@ -17,7 +19,9 @@ export const PageTemplate = () => {
       </Navbar>
 
       <div className="m-3">
-        <Outlet></Outlet>
+        <ErrorBoundary FallbackComponent={FallbackRender}>
+          <Outlet></Outlet>
+        </ErrorBoundary>
       </div>
     </>
   );

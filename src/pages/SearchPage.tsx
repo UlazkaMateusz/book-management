@@ -1,13 +1,14 @@
 import { BookList } from "../features/BookList";
 import { BookSearchBar, BookSearchBarValues } from "../features/BookSearchBar";
 import { useSearchBooks } from "../hooks/useSearchBooks";
+import { RenderingError } from "../types/RenderingError";
 
 export const SearchPage = () => {
   const { data, error, isLoading, setValues, status, getValues } =
     useSearchBooks();
 
   const onSubmit = (values: BookSearchBarValues) => {
-    let newValues = Object.entries(values).filter(([, value]) => !!value) as [
+    const newValues = Object.entries(values).filter(([, value]) => !!value) as [
       string,
       string
     ][];
@@ -15,7 +16,7 @@ export const SearchPage = () => {
   };
 
   if (error) {
-    console.error(error);
+    throw new RenderingError("Failed to fetch data", 400);
   }
 
   const values = getValues();

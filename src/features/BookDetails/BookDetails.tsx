@@ -2,7 +2,7 @@ import { Button, Col, Container, Placeholder, Row } from "react-bootstrap";
 import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
 import { AuthorDetailsResponse } from "../../types/AuthorDetailsResponse";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useFavouriteBooks } from "../../hooks/useFavouriteBooks";
 
 export interface BookDetailsParams {
@@ -23,12 +23,8 @@ export const BookDetails = ({
     setImageLoading(false);
   };
 
-  const isFavourite = useMemo(
-    () =>
-      !!favouriteBooks.find(
-        (favouriteBook) => favouriteBook.key == bookDetailsResponse.key
-      ),
-    [favouriteBooks]
+  const isFavourite = !!favouriteBooks.find(
+    (favouriteBook) => favouriteBook.key == bookDetailsResponse.key
   );
 
   const handleFavouriteButton = () => {
