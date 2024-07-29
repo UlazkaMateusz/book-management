@@ -15,7 +15,7 @@ const initialValues = {
 } as BookFilterValues;
 
 export const MyBooksPage = () => {
-  const [favouriteBooks] = useFavouriteBooks();
+  const { books: favouriteBooks } = useFavouriteBooks();
   const [booksCollection] = useBooksCollection();
   const [filter, setFilter] = useState({} as BookFilterValues);
 

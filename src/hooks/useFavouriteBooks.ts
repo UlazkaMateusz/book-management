@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FavouriteBookStorageType } from "../types/FavouriteBookStorageType";
 
 const favouriteBooksLocalStorageKey = "favouriteBooks";
@@ -16,5 +16,14 @@ export const useFavouriteBooks = () => {
     localStorage.setItem(favouriteBooksLocalStorageKey, JSON.stringify(books));
   }, [books, setBooks]);
 
-  return [books, setBooks] as const;
+  const addFavourite = (book: FavouriteBookStorageType) => {
+    const newFavouriteBooks = [...books, book];
+    setBooks(newFavouriteBooks);
+  };
+
+  const removeFavourite = (key: string) => {
+    setBooks(books.filter((favouriteBook) => favouriteBook.key !== key));
+  };
+
+  return { books, addFavourite, removeFavourite } as const;
 };

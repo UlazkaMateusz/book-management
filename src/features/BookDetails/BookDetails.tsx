@@ -17,7 +17,11 @@ export const BookDetails = ({
   areAuthorsLoading,
 }: BookDetailsParams) => {
   const [imageLoading, setImageLoading] = useState(true);
-  const [favouriteBooks, setFavouriteBooks] = useFavouriteBooks();
+  const {
+    books: favouriteBooks,
+    addFavourite,
+    removeFavourite,
+  } = useFavouriteBooks();
 
   const handleImageOnLoad = () => {
     setImageLoading(false);
@@ -29,21 +33,13 @@ export const BookDetails = ({
 
   const handleFavouriteButton = () => {
     if (isFavourite) {
-      setFavouriteBooks(
-        favouriteBooks.filter(
-          (favouriteBook) => favouriteBook.key !== bookDetailsResponse.key
-        )
-      );
+      removeFavourite(bookDetailsResponse.key);
     } else {
-      const newFavouriteBooks = [
-        ...favouriteBooks,
-        {
-          key: bookDetailsResponse.key,
-          title: bookDetailsResponse.title,
-          authors: authors.map((a) => a.name),
-        },
-      ];
-      setFavouriteBooks(newFavouriteBooks);
+      addFavourite({
+        key: bookDetailsResponse.key,
+        title: bookDetailsResponse.title,
+        authors: authors.map((a) => a.name),
+      });
     }
   };
 
