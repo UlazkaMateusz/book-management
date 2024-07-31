@@ -15,7 +15,7 @@ export const bookApi = createApi({
     baseUrl: `https://openlibrary.org`,
   }),
   endpoints: (builder) => ({
-    searchBooks: builder.mutation<BookSearchResponse, SearchBooksQuery>({
+    searchBooks: builder.query<BookSearchResponse, SearchBooksQuery>({
       query: ({ title, author, year }) => {
         const urlParts = [];
 
@@ -44,7 +44,7 @@ export const bookApi = createApi({
 });
 
 export const {
-  useSearchBooksMutation,
+  useLazySearchBooksQuery,
   useBookDetailsQuery,
   useLazyAuthorDetailsQuery,
 } = bookApi;

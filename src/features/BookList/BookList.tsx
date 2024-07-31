@@ -4,14 +4,14 @@ import { CenteredSpinner } from "../../shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
 
 export interface BookListParams {
-  isLoading: boolean;
+  isFetching: boolean;
   data?: BookSearchResponse;
 }
 
-export const BookList = ({ isLoading, data }: BookListParams) => {
+export const BookList = ({ isFetching, data }: BookListParams) => {
   const navigate = useNavigate();
 
-  if (isLoading) {
+  if (isFetching) {
     return <CenteredSpinner></CenteredSpinner>;
   }
 

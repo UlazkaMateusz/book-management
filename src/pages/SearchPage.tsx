@@ -4,7 +4,7 @@ import { useSearchBooks } from "../hooks/useSearchBooks";
 import { RenderingError } from "../types/RenderingError";
 
 export const SearchPage = () => {
-  const { data, error, isLoading, setValues, status, getValues } =
+  const { data, error, isFetching, setValues, status, getValues } =
     useSearchBooks();
 
   const onSubmit = (values: BookSearchBarValues) => {
@@ -32,7 +32,7 @@ export const SearchPage = () => {
         onSubmit={onSubmit}
       ></BookSearchBar>
 
-      <BookList data={data} isLoading={isLoading}></BookList>
+      <BookList data={data} isFetching={isFetching}></BookList>
     </>
   );
 };

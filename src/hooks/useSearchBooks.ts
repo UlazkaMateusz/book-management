@@ -1,10 +1,10 @@
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
-import { useSearchBooksMutation } from "../api/BookApi";
 import { useCallback, useEffect } from "react";
+import { useLazySearchBooksQuery } from "../api/BookApi";
 
 export const useSearchBooks = () => {
-  const [fetchSearchData, { isLoading, data, error, status }] =
-    useSearchBooksMutation();
+  const [fetchSearchData, { data, error, status, isFetching }] =
+    useLazySearchBooksQuery();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -37,7 +37,7 @@ export const useSearchBooks = () => {
   return {
     getValues: getSearchParamValues,
     setValues: (v: URLSearchParamsInit) => setSearchParams(v),
-    isLoading,
+    isFetching,
     data,
     error,
     status,
