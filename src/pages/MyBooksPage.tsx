@@ -17,7 +17,7 @@ const initialValues = {
 export const MyBooksPage = () => {
   const { books: favouriteBooks } = useFavouriteBooks();
   const [booksCollection] = useBooksCollection();
-  const [filter, setFilter] = useState({} as BookFilterValues);
+  const [filter, setFilter] = useState<BookFilterValues>({});
 
   const onSubmit = (data: BookFilterValues) => {
     setFilter(data);

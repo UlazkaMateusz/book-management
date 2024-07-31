@@ -8,8 +8,8 @@ export const useFavouriteBooks = () => {
     const books = localStorage.getItem(favouriteBooksLocalStorageKey);
 
     // @ts-expect-error JSON.parse properly handles null. If null is passed then null is returned
-    const initialValue = JSON.parse(books);
-    return (initialValue || []) as FavouriteBookStorageType[];
+    const initialValue: FavouriteBookStorageType[] = JSON.parse(books);
+    return initialValue || [];
   });
 
   useEffect(() => {

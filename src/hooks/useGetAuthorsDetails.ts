@@ -4,7 +4,7 @@ import { AuthorDetailsResponse } from "../types/AuthorDetailsResponse";
 import { useLazyAuthorDetailsQuery } from "../api/BookApi";
 
 export const useGetAuthorsDetails = () => {
-  const [authors, setAuthors] = useState([] as AuthorDetailsResponse[]);
+  const [authors, setAuthors] = useState<AuthorDetailsResponse[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [trigger] = useLazyAuthorDetailsQuery();
 

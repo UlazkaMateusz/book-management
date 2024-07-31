@@ -9,7 +9,7 @@ export interface BookFilterParams {
 export interface BookFilterValues {
   title?: string;
   author?: string;
-  readingProgress: "all books" | "unfinished only" | "finished only";
+  readingProgress?: "all books" | "unfinished only" | "finished only";
 }
 
 export const BookFilter = ({ initialValues, onSubmit }: BookFilterParams) => {

@@ -8,10 +8,7 @@ export const SearchPage = () => {
     useSearchBooks();
 
   const onSubmit = (values: BookSearchBarValues) => {
-    const newValues = Object.entries(values).filter(([, value]) => !!value) as [
-      string,
-      string
-    ][];
+    const newValues = Object.entries(values).filter(([, value]) => !!value);
     setValues(newValues);
   };
 
