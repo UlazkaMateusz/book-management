@@ -1,8 +1,8 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useBooksCollection } from "../../hooks/useBooksCollection";
-import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 import { PersonalRatingSchema } from "./PersonalRatingSchema";
+import { BookDetailsResponse } from "../../api/types";
 
 interface FormValues {
   notes: string;
@@ -10,13 +10,13 @@ interface FormValues {
   rating: "" | "1" | "2" | "3" | "4" | "5";
 }
 
-export interface PersonalRatingParams {
+export interface PersonalRatingProps {
   bookDetailsResponse: BookDetailsResponse;
 }
 
 export const PersonalRating = ({
   bookDetailsResponse,
-}: PersonalRatingParams) => {
+}: PersonalRatingProps) => {
   const [books, setBooks] = useBooksCollection();
 
   const savedBook = books.find((b) => b.key == bookDetailsResponse.key);

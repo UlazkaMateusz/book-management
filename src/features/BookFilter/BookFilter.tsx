@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 
-export interface BookFilterParams {
+export interface BookFilterProps {
   initialValues: BookFilterValues;
   onSubmit: (values: BookFilterValues) => void;
 }
@@ -12,7 +12,7 @@ export interface BookFilterValues {
   readingProgress?: "all books" | "unfinished only" | "finished only";
 }
 
-export const BookFilter = ({ initialValues, onSubmit }: BookFilterParams) => {
+export const BookFilter = ({ initialValues, onSubmit }: BookFilterProps) => {
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ values, handleSubmit, handleChange }) => (

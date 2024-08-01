@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { BookSearchSchema } from "./BookSearchSchema";
 
-export interface BookSearchBarParams {
+export interface BookSearchBarProps {
   initialValues: BookSearchBarValues;
   status: QueryStatus;
   onSubmit: (values: BookSearchBarValues) => void;
@@ -19,7 +19,7 @@ export const BookSearchBar = ({
   initialValues,
   status,
   onSubmit,
-}: BookSearchBarParams) => {
+}: BookSearchBarProps) => {
   return (
     <Formik
       initialValues={initialValues}

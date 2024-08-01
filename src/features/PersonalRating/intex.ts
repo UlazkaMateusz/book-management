@@ -1,2 +1,2 @@
 export { PersonalRating } from "./PersonalRating";
-export type { PersonalRatingParams } from "./PersonalRating";
+export type { PersonalRatingProps } from "./PersonalRating";

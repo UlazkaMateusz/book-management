@@ -1,2 +1,2 @@
 export { BookDetails } from "./BookDetails";
-export type { BookDetailsParams } from "./BookDetails";
+export type { BookDetailsProps } from "./BookDetails";

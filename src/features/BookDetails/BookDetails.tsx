@@ -1,11 +1,10 @@
 import { Button, Col, Container, Placeholder, Row } from "react-bootstrap";
-import { BookDetailsResponse } from "../../types/BookDetailsResponse";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
-import { AuthorDetailsResponse } from "../../types/AuthorDetailsResponse";
 import { useState } from "react";
 import { useFavouriteBooks } from "../../hooks/useFavouriteBooks";
+import { AuthorDetailsResponse, BookDetailsResponse } from "../../api/types";
 
-export interface BookDetailsParams {
+export interface BookDetailsProps {
   bookDetailsResponse: BookDetailsResponse;
   authors: AuthorDetailsResponse[];
   areAuthorsLoading: boolean;
@@ -15,7 +14,7 @@ export const BookDetails = ({
   bookDetailsResponse,
   authors,
   areAuthorsLoading,
-}: BookDetailsParams) => {
+}: BookDetailsProps) => {
   const [imageLoading, setImageLoading] = useState(true);
   const {
     books: favouriteBooks,

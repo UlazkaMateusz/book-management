@@ -1,11 +1,11 @@
 import { NavLink, useParams } from "react-router-dom";
-import { useBookDetailsQuery } from "../api/BookApi";
+import { useBookDetailsQuery } from "../../../api/bookApi";
 import { Button } from "react-bootstrap";
-import { CenteredSpinner } from "../shared/CenteredSpinner";
-import { BookDetails } from "../features/BookDetails";
-import { PersonalRating } from "../features/PersonalRating/PersonalRating";
-import { useGetAuthorsDetails } from "../hooks/useGetAuthorsDetails";
-import { RenderingError } from "../types/RenderingError";
+import { CenteredSpinner } from "../../../shared/CenteredSpinner";
+import { BookDetails } from "../../../features/BookDetails";
+import { PersonalRating } from "../../../features/PersonalRating/PersonalRating";
+import { useGetAuthorsDetails } from "../../../hooks/useGetAuthorsDetails";
+import { RenderingError } from "../../../types/RenderingError";
 import { useEffect } from "react";
 
 export const BookDetailPage = () => {

@@ -1,6 +1,6 @@
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
 import { useCallback, useEffect } from "react";
-import { useLazySearchBooksQuery } from "../api/BookApi";
+import { useLazySearchBooksQuery } from "../api/bookApi";
 
 export const useSearchBooks = () => {
   const [fetchSearchData, { data, error, status, isFetching }] =

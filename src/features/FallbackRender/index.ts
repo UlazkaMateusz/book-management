@@ -1,1 +1,1 @@
-export { FallbackRender } from "./FallbackRender";
+export { FallbackRender } from "./ui/FallbackRender";

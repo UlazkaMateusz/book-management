@@ -1,2 +1,2 @@
 export { BookCard } from "./BookCard";
-export type { BookCardParams } from "./BookCard";
+export type { BookCardProps } from "./BookCard";

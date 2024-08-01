@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BookSearchResponse } from "../types/BookSearchResponse";
-import { BookDetailsResponse } from "../types/BookDetailsResponse";
-import { AuthorDetailsResponse } from "../types/AuthorDetailsResponse";
+import {
+  AuthorDetailsResponse,
+  BookDetailsResponse,
+  BookSearchResponse,
+} from "./types";
 
 interface SearchBooksQuery {
   title?: string;
@@ -12,7 +14,7 @@ interface SearchBooksQuery {
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://openlibrary.org`,
+    baseUrl: import.meta.env.VITE_BOOKS_API_BASE_URL,
   }),
   endpoints: (builder) => ({
     searchBooks: builder.query<BookSearchResponse, SearchBooksQuery>({

@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
-import { BookDetailsResponse } from "../types/BookDetailsResponse";
-import { AuthorDetailsResponse } from "../types/AuthorDetailsResponse";
-import { useLazyAuthorDetailsQuery } from "../api/BookApi";
+import { useLazyAuthorDetailsQuery } from "../api/bookApi";
+import { AuthorDetailsResponse, BookDetailsResponse } from "../api/types";
 
 export const useGetAuthorsDetails = () => {
   const [authors, setAuthors] = useState<AuthorDetailsResponse[]>([]);

@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
-import { Book, BookSearchResponse } from "../../types/BookSearchResponse";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
+import { Book, BookSearchResponse } from "../../api/types";
 
 export interface BookListParams {
   isFetching: boolean;

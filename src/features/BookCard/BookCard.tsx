@@ -1,14 +1,14 @@
 import { Card, Placeholder } from "react-bootstrap";
-import { useBookDetailsQuery } from "../../api/BookApi";
+import { useBookDetailsQuery } from "../../api/bookApi";
 import { useState } from "react";
 import { CenteredSpinner } from "../../shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
 
-export interface BookCardParams {
+export interface BookCardProps {
   bookKey: string;
 }
 
-export const BookCard = ({ bookKey }: BookCardParams) => {
+export const BookCard = ({ bookKey }: BookCardProps) => {
   const { isLoading, data } = useBookDetailsQuery(bookKey);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const navigate = useNavigate();
