@@ -1,8 +1,8 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { useBooksCollection } from "../../hooks/useBooksCollection";
+import { useBooksCollection } from "../../../../hooks/useBooksCollection";
 import { PersonalRatingSchema } from "./PersonalRatingSchema";
-import { BookDetailsResponse } from "../../api/types";
+import { BookDetailsResponse } from "../../../../api/types";
 
 interface FormValues {
   notes: string;

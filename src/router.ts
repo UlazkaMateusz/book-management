@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { SearchPage } from "./pages/SearchPage";
-import { BookDetailPage } from "./pages/BookDetailsPage/ui/BookDetailsPage";
-import { MyBooksPage } from "./pages/MyBooksPage";
 import { PageTemplate } from "./templates/PageTemplate";
+import { SearchPage } from "./pages/Search";
+import { BookDetailPage } from "./pages/BookDetails";
+import { MyBooksPage } from "./pages/MyBooks";
 
 export const router = createBrowserRouter([
   {

@@ -4,6 +4,10 @@ import {
   BookDetailsResponse,
   BookSearchResponse,
 } from "./types";
+import {
+  setBookSearchData,
+  setBookSearchFetching,
+} from "../entities/bookSearch/bookSearchSlice";
 
 interface SearchBooksQuery {
   title?: string;
@@ -32,6 +36,12 @@ export const bookApi = createApi({
         }
 
         return "search.json?" + urlParts.join("&");
+      },
+
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        dispatch(setBookSearchFetching());
+        const result = await queryFulfilled;
+        dispatch(setBookSearchData(result.data));
       },
     }),
 

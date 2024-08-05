@@ -1,13 +1,7 @@
-import { QueryStatus } from "@reduxjs/toolkit/query";
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { BookSearchSchema } from "./BookSearchSchema";
-
-export interface BookSearchBarProps {
-  initialValues: BookSearchBarValues;
-  status: QueryStatus;
-  onSubmit: (values: BookSearchBarValues) => void;
-}
+import { useSearchBooks } from "../../utils/hooks/useSearchBooks";
 
 export interface BookSearchBarValues {
   title?: string;
@@ -15,11 +9,22 @@ export interface BookSearchBarValues {
   year?: string;
 }
 
-export const BookSearchBar = ({
-  initialValues,
-  status,
-  onSubmit,
-}: BookSearchBarProps) => {
+export const BookSearchBar = () => {
+  const { setValues, status, getValues } = useSearchBooks();
+
+  const onSubmit = (values: BookSearchBarValues) => {
+    const newValues = Object.entries(values).filter(([, value]) => !!value);
+    setValues(newValues);
+  };
+
+  const values = getValues();
+
+  const initialValues = {
+    title: values.title ?? "",
+    author: values.author ?? "",
+    year: values.year ? values.year.toString() : "",
+  };
+
   return (
     <Formik
       initialValues={initialValues}

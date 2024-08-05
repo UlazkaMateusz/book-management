@@ -1,10 +1,7 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-
-export interface BookFilterProps {
-  initialValues: BookFilterValues;
-  onSubmit: (values: BookFilterValues) => void;
-}
+import { useDispatch } from "react-redux";
+import { setMyBooksFilters } from "../../../../entities/myBooksSearchFilters/myBookSearchFiltersSlice";
 
 export interface BookFilterValues {
   title?: string;
@@ -12,7 +9,19 @@ export interface BookFilterValues {
   readingProgress?: "all books" | "unfinished only" | "finished only";
 }
 
-export const BookFilter = ({ initialValues, onSubmit }: BookFilterProps) => {
+const initialValues: BookFilterValues = {
+  title: "",
+  author: "",
+  readingProgress: "all books",
+};
+
+export const BookFilter = () => {
+  const dispatch = useDispatch();
+
+  const onSubmit = (data: BookFilterValues) => {
+    dispatch(setMyBooksFilters(data));
+  };
+
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ values, handleSubmit, handleChange }) => (

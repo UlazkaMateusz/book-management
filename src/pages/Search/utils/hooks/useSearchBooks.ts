@@ -1,6 +1,7 @@
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
 import { useCallback, useEffect } from "react";
-import { useLazySearchBooksQuery } from "../api/bookApi";
+import { useLazySearchBooksQuery } from "../../../../api/bookApi";
+import { RenderingError } from "../../../../types/RenderingError";
 
 export const useSearchBooks = () => {
   const [fetchSearchData, { data, error, status, isFetching }] =
@@ -33,6 +34,10 @@ export const useSearchBooks = () => {
       });
     }
   }, [searchParams, fetchSearchData, getSearchParamValues]);
+
+  if (error) {
+    throw new RenderingError("Failed to fetch data", 400);
+  }
 
   return {
     getValues: getSearchParamValues,

@@ -1,15 +1,16 @@
 import { Table } from "react-bootstrap";
-import { CenteredSpinner } from "../../shared/CenteredSpinner";
+import { CenteredSpinner } from "../../../../shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
-import { Book, BookSearchResponse } from "../../api/types";
+import { Book } from "../../../../api/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store";
 
-export interface BookListParams {
-  isFetching: boolean;
-  data?: BookSearchResponse;
-}
-
-export const BookList = ({ isFetching, data }: BookListParams) => {
+export const BookList = () => {
   const navigate = useNavigate();
+
+  const { data, isFetching } = useSelector(
+    (state: RootState) => state.bookSearch
+  );
 
   if (isFetching) {
     return <CenteredSpinner></CenteredSpinner>;
