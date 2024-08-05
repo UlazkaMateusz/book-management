@@ -9,7 +9,7 @@ const initialState: MyBookSearchFiltersState = {
   bookFilterValues: {},
 };
 
-const myBookSearchFiltersSlice = createSlice({
+export const myBookSearchFiltersSlice = createSlice({
   name: "myBookSearchFilters",
 
   initialState: initialState,
@@ -21,4 +21,4 @@ const myBookSearchFiltersSlice = createSlice({
 });
 
 export const { setMyBooksFilters } = myBookSearchFiltersSlice.actions;
-export const myBookSearchFiltersReducer = myBookSearchFiltersSlice.reducer;
+export default myBookSearchFiltersSlice.reducer;

@@ -10,7 +10,7 @@ const initialState: BookSearchState = {
   isFetching: false,
 };
 
-const bookSearchSlice = createSlice({
+export const bookSearchSlice = createSlice({
   name: "bookSearch",
 
   initialState: initialState,
@@ -27,4 +27,4 @@ const bookSearchSlice = createSlice({
 
 export const { setBookSearchFetching, setBookSearchData } =
   bookSearchSlice.actions;
-export const bookSearchReducer = bookSearchSlice.reducer;
+export default bookSearchSlice.reducer;

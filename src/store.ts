@@ -1,12 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { bookApi } from "./api/bookApi";
-import { myBookSearchFiltersReducer } from "./entities/myBooksSearchFilters/myBookSearchFiltersSlice";
-import { bookSearchReducer } from "./entities/bookSearch/bookSearchSlice";
+import myBookSearchFiltersReducer, {
+  myBookSearchFiltersSlice,
+} from "./entities/myBooksSearchFilters/myBookSearchFiltersSlice";
+import bookSearchReducer, {
+  bookSearchSlice,
+} from "./entities/bookSearch/bookSearchSlice";
 
 const store = configureStore({
   reducer: combineReducers({
-    bookSearch: bookSearchReducer,
-    myBookSearchFilters: myBookSearchFiltersReducer,
+    [bookSearchSlice.name]: bookSearchReducer,
+    [myBookSearchFiltersSlice.name]: myBookSearchFiltersReducer,
     [bookApi.reducerPath]: bookApi.reducer,
   }),
 
