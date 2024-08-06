@@ -10,19 +10,20 @@ export interface BookSearchBarValues {
 }
 
 export const BookSearchBar = () => {
-  const { setValues, status, getValues } = useSearchBooks();
+  const { setValues, status, searchParams } = useSearchBooks();
 
   const onSubmit = (values: BookSearchBarValues) => {
-    const newValues = Object.entries(values).filter(([, value]) => !!value);
-    setValues(newValues);
+    const newParams = {
+      ...values,
+      year: values.year ? parseInt(values.year, 10) : undefined,
+    };
+    setValues(newParams);
   };
 
-  const values = getValues();
-
   const initialValues = {
-    title: values.title ?? "",
-    author: values.author ?? "",
-    year: values.year ? values.year.toString() : "",
+    title: searchParams.title ?? "",
+    author: searchParams.author ?? "",
+    year: searchParams.year ? searchParams.year.toString() : "",
   };
 
   return (
@@ -30,6 +31,7 @@ export const BookSearchBar = () => {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={BookSearchSchema}
+      enableReinitialize
     >
       {({ values, errors, handleSubmit, handleChange }) => (
         <Form onSubmit={handleSubmit}>

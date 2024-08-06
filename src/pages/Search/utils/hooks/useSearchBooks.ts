@@ -1,47 +1,45 @@
-import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useLazySearchBooksQuery } from "../../../../api/bookApi";
 import { RenderingError } from "../../../../types/RenderingError";
+import { useReduxSearchParams } from "../../../../hooks/useReduxSearchParams";
+import { SearchParams } from "../../../../entities/bookSearch/types/SearchParams";
+import { setSearchParams } from "../../../../entities/bookSearch/bookSearchSlice";
 
+const searchBooksFromUrlParams = (urlParams: URLSearchParams): SearchParams => {
+  const year = urlParams.get("year");
+  return {
+    author: urlParams.get("author") ?? undefined,
+    title: urlParams.get("title") ?? undefined,
+    year: year ? parseInt(year, 10) : undefined,
+  };
+};
 export const useSearchBooks = () => {
   const [fetchSearchData, { data, error, status, isFetching }] =
     useLazySearchBooksQuery();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const getSearchParamValues = useCallback(() => {
-    const author = searchParams.get("author") ?? undefined;
-    const title = searchParams.get("title") ?? undefined;
-
-    const year_param = searchParams.get("year");
-    const year = year_param ? parseInt(year_param, 10) : undefined;
-
-    return {
-      author,
-      title,
-      year,
-    };
-  }, [searchParams]);
+  const [params, setParams] = useReduxSearchParams(
+    (state) => state.bookSearch.searchParams,
+    (payload) => setSearchParams(payload),
+    searchBooksFromUrlParams
+  );
 
   useEffect(() => {
-    const values = getSearchParamValues();
-
-    if (values.author || values.title || values.year) {
+    if (params.author || params.title || params.year) {
       fetchSearchData({
-        author: values.author,
-        title: values.title,
-        year: values.year,
+        author: params.author,
+        title: params.title,
+        year: params.year,
       });
     }
-  }, [searchParams, fetchSearchData, getSearchParamValues]);
+  }, [params, fetchSearchData]);
 
   if (error) {
     throw new RenderingError("Failed to fetch data", 400);
   }
 
   return {
-    getValues: getSearchParamValues,
-    setValues: (v: URLSearchParamsInit) => setSearchParams(v),
+    searchParams: params,
+    setValues: (v: SearchParams) => setParams(v),
     isFetching,
     data,
     error,

@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BookSearchResponse } from "../../api/types";
-
-interface BookSearchState {
-  isFetching: boolean;
-  data?: BookSearchResponse;
-}
+import { BookSearchState } from "./types/BookSearchState";
+import { SearchParams } from "./types/SearchParams";
 
 const initialState: BookSearchState = {
   isFetching: false,
+  searchParams: {},
 };
 
 export const bookSearchSlice = createSlice({
@@ -22,9 +20,12 @@ export const bookSearchSlice = createSlice({
       state.isFetching = false;
       state.data = action.payload;
     },
+    setSearchParams: (state, action: PayloadAction<SearchParams>) => {
+      state.searchParams = action.payload;
+    },
   },
 });
 
-export const { setBookSearchFetching, setBookSearchData } =
+export const { setBookSearchFetching, setBookSearchData, setSearchParams } =
   bookSearchSlice.actions;
 export default bookSearchSlice.reducer;

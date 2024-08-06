@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import { setMyBooksFilters } from "../../../../entities/myBooksSearchFilters/myBookSearchFiltersSlice";
+import { useReduxSearchParams } from "../../../../hooks/useReduxSearchParams";
 
 export interface BookFilterValues {
   title?: string;
@@ -9,21 +9,29 @@ export interface BookFilterValues {
   readingProgress?: "all books" | "unfinished only" | "finished only";
 }
 
-const initialValues: BookFilterValues = {
-  title: "",
-  author: "",
-  readingProgress: "all books",
+const bookFilterValuesFromUrlSearchParams = (
+  urlSreachParams: URLSearchParams
+) => {
+  return {
+    author: urlSreachParams.get("author") ?? undefined,
+    title: urlSreachParams.get("title") ?? undefined,
+    readingProgress: urlSreachParams.get("readingProgress") ?? undefined,
+  } as BookFilterValues;
 };
 
 export const BookFilter = () => {
-  const dispatch = useDispatch();
+  const [params, setParams] = useReduxSearchParams(
+    (state) => state.myBookSearchFilters.bookFilterValues,
+    (data) => setMyBooksFilters(data),
+    bookFilterValuesFromUrlSearchParams
+  );
 
   const onSubmit = (data: BookFilterValues) => {
-    dispatch(setMyBooksFilters(data));
+    setParams(data);
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={params} onSubmit={onSubmit} enableReinitialize>
       {({ values, handleSubmit, handleChange }) => (
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mt-3">
