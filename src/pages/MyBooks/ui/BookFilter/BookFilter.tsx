@@ -36,8 +36,18 @@ export const BookFilter = () => {
     setParams(data);
   };
 
+  const initialValues = {
+    title: params.title ?? "",
+    author: params.author ?? "",
+    readingProgress: params.readingProgress ?? "all books",
+  };
+
   return (
-    <Formik initialValues={params} onSubmit={onSubmit} enableReinitialize>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      enableReinitialize
+    >
       {({ values, handleSubmit, handleChange }) => (
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mt-3">
