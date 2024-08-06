@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useLazySearchBooksQuery } from "../../../../api/bookApi";
 import { RenderingError } from "../../../../types/RenderingError";
 import { useReduxSearchParams } from "../../../../hooks/useReduxSearchParams";
@@ -17,9 +17,14 @@ export const useSearchBooks = () => {
   const [fetchSearchData, { data, error, status, isFetching }] =
     useLazySearchBooksQuery();
 
+  const action = useCallback(
+    (payload: SearchParams) => setSearchParams(payload),
+    []
+  );
+
   const [params, setParams] = useReduxSearchParams(
     (state) => state.bookSearch.searchParams,
-    (payload) => setSearchParams(payload),
+    action,
     searchBooksFromUrlParams
   );
 

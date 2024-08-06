@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { setMyBooksFilters } from "../../../../entities/myBooksSearchFilters/myBookSearchFiltersSlice";
 import { useReduxSearchParams } from "../../../../hooks/useReduxSearchParams";
+import { useCallback } from "react";
 
 export interface BookFilterValues {
   title?: string;
@@ -20,9 +21,14 @@ const bookFilterValuesFromUrlSearchParams = (
 };
 
 export const BookFilter = () => {
+  const action = useCallback(
+    (data: BookFilterValues) => setMyBooksFilters(data),
+    []
+  );
+
   const [params, setParams] = useReduxSearchParams(
     (state) => state.myBookSearchFilters.bookFilterValues,
-    (data) => setMyBooksFilters(data),
+    action,
     bookFilterValuesFromUrlSearchParams
   );
 

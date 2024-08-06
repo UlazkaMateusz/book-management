@@ -21,7 +21,14 @@ export const useReduxSearchParams = <Params extends object>(
       const urlParams = paramsToUrlParams(params);
       setUrlSearchParams(urlParams);
     }
-  }, []);
+  }, [
+    action,
+    dispatch,
+    fromUrlSearchParams,
+    params,
+    setUrlSearchParams,
+    urlSearchParams,
+  ]);
 
   const setParams = (params: Params) => {
     dispatch(action(params));
@@ -38,5 +45,5 @@ const paramsToUrlParams = <Params extends object>(params: Params) => {
 };
 
 const isObjectEmpty = (obj: object) => {
-  return !Object.entries(obj).some((key, value) => !!value);
+  return !Object.entries(obj).some((_key, value) => !!value);
 };
