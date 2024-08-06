@@ -2,13 +2,13 @@ import { useBookDetailsQuery } from "../../../../api/bookApi";
 import { RenderingError } from "../../../../types/RenderingError";
 
 export const useGetBookDetails = (bookKey: string) => {
-  const { data, error, isLoading } = useBookDetailsQuery(bookKey);
+  const { data, error, isLoading, isSuccess } = useBookDetailsQuery(bookKey);
 
   if (error) {
     throw new RenderingError("Failed to fetch data", 404);
   }
 
-  if (!isLoading && !data) {
+  if (isSuccess && !data) {
     throw new RenderingError("Data is missing", 404);
   }
 
