@@ -30,11 +30,14 @@ export const useSearchBooks = () => {
 
   useEffect(() => {
     if (params.author || params.title || params.year) {
-      fetchSearchData({
-        author: params.author,
-        title: params.title,
-        year: params.year,
-      });
+      fetchSearchData(
+        {
+          author: params.author,
+          title: params.title,
+          year: params.year,
+        },
+        true
+      );
     }
   }, [params, fetchSearchData]);
 
