@@ -14,7 +14,7 @@ export const useGetAuthorsDetails = () => {
     async (bookDetailsResponse: BookDetailsResponse) => {
       const authorsDetails = [];
       for (const author of bookDetailsResponse.authors) {
-        const { data, error } = await trigger(author.author.key);
+        const { data, error } = await trigger(author.author.key, true);
 
         if (error) {
           console.error(error);
