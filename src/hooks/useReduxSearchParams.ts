@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { RootState } from "../store";
 import { useEffect } from "react";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { useAppDispatch, useAppSelector } from "./redux";
 
 export const useReduxSearchParams = <Params extends object>(
   selector: (state: RootState) => Params,
   action: (value: Params) => PayloadAction<Params, string>,
   fromUrlSearchParams: (urlSearchParams: URLSearchParams) => Params
 ): [Params, (params: Params) => void] => {
-  const dispatch = useDispatch();
-  const params = useSelector(selector);
+  const dispatch = useAppDispatch();
+  const params = useAppSelector(selector);
 
   const [urlSearchParams, setUrlSearchParams] = useSearchParams();
 

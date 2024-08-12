@@ -2,15 +2,12 @@ import { Table } from "react-bootstrap";
 import { CenteredSpinner } from "../../../../shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../../../../api/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
+import { useAppSelector } from "../../../../hooks/redux";
 
 export const BookList = () => {
   const navigate = useNavigate();
 
-  const { data, isFetching } = useSelector(
-    (state: RootState) => state.bookSearch
-  );
+  const { data, isFetching } = useAppSelector((state) => state.bookSearch);
 
   if (isFetching) {
     return <CenteredSpinner></CenteredSpinner>;
