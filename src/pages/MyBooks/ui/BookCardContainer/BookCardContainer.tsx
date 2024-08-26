@@ -18,12 +18,8 @@ export const BookCardContainer = () => {
 
   return (
     <>
-      {" "}
       {books.map((favouriteBook) => (
-        <BookCard
-          key={favouriteBook.key}
-          bookKey={favouriteBook.key}
-        />
+        <BookCard key={favouriteBook.key} bookKey={favouriteBook.key} />
       ))}
     </>
   );

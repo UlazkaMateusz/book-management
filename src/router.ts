@@ -4,7 +4,7 @@ import { SearchPage } from "./pages/Search";
 import { BookDetailPage } from "./pages/BookDetails";
 import { MyBooksPage } from "./pages/MyBooks";
 
-export const router = createBrowserRouter([
+const routes = [
   {
     path: "/*",
     Component: PageTemplate,
@@ -27,4 +27,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+export const router = createBrowserRouter(routes);
