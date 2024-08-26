@@ -11,7 +11,7 @@ export interface BookFilterValues {
 }
 
 const bookFilterValuesFromUrlSearchParams = (
-  urlSreachParams: URLSearchParams
+  urlSreachParams: URLSearchParams,
 ) => {
   return {
     author: urlSreachParams.get("author") ?? undefined,
@@ -23,13 +23,13 @@ const bookFilterValuesFromUrlSearchParams = (
 export const BookFilter = () => {
   const action = useCallback(
     (data: BookFilterValues) => setMyBooksFilters(data),
-    []
+    [],
   );
 
   const [params, setParams] = useReduxSearchParams(
     (state) => state.myBookSearchFilters.bookFilterValues,
     action,
-    bookFilterValuesFromUrlSearchParams
+    bookFilterValuesFromUrlSearchParams,
   );
 
   const onSubmit = (data: BookFilterValues) => {

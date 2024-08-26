@@ -28,7 +28,7 @@ export const useGetAuthorsDetails = () => {
       setAuthors(authorsDetails);
       setIsLoading(false);
     },
-    [trigger]
+    [trigger],
   );
 
   return { trigger: getAuthorDetailsTrigger, authors, isLoading };

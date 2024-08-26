@@ -9,11 +9,11 @@ export const BookCardContainer = () => {
   const [booksCollection] = useBooksCollection();
 
   const filter = useAppSelector(
-    (state) => state.myBookSearchFilters.bookFilterValues
+    (state) => state.myBookSearchFilters.bookFilterValues,
   );
 
   const books = favouriteBooks.filter((book) =>
-    isBookFilteredOut(book, filter, booksCollection)
+    isBookFilteredOut(book, filter, booksCollection),
   );
 
   return (

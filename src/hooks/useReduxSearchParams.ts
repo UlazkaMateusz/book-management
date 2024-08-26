@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "./redux";
 export const useReduxSearchParams = <Params extends object>(
   selector: (state: RootState) => Params,
   action: (value: Params) => PayloadAction<Params, string>,
-  fromUrlSearchParams: (urlSearchParams: URLSearchParams) => Params
+  fromUrlSearchParams: (urlSearchParams: URLSearchParams) => Params,
 ): [Params, (params: Params) => void] => {
   const dispatch = useAppDispatch();
   const params = useAppSelector(selector);

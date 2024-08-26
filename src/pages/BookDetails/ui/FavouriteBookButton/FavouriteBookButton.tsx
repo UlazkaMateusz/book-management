@@ -23,7 +23,7 @@ export const FavouriteBookButton = ({
   } = useFavouriteBooks();
 
   const isFavourite = !!favouriteBooks.find(
-    (favouriteBook) => favouriteBook.key == bookDetailsResponse.key
+    (favouriteBook) => favouriteBook.key == bookDetailsResponse.key,
   );
 
   const handleFavouriteButton = () => {

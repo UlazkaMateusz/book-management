@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router}></RouterProvider>
       </div>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

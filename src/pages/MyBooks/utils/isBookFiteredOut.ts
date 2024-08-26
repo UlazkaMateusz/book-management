@@ -5,12 +5,12 @@ import { BookFilterValues } from "../ui/BookFilter/BookFilter";
 export const isBookFilteredOut = (
   book: FavouriteBookStorageType,
   filter: BookFilterValues,
-  booksCollection: BookStorageType[]
+  booksCollection: BookStorageType[],
 ) => {
   let shouldStay = true;
   if (shouldStay && filter.author) {
     shouldStay = book?.authors.some((author) =>
-      author.toLocaleLowerCase().includes(filter.author!.toLocaleLowerCase())
+      author.toLocaleLowerCase().includes(filter.author!.toLocaleLowerCase()),
     );
   }
 
@@ -20,7 +20,7 @@ export const isBookFilteredOut = (
     filter.readingProgress !== "all books"
   ) {
     const foundBook: BookStorageType | undefined = booksCollection.find(
-      (b) => b.key == book?.key
+      (b) => b.key == book?.key,
     );
     if (filter.readingProgress == "finished only") {
       shouldStay = foundBook?.readingProgress == "Finished";

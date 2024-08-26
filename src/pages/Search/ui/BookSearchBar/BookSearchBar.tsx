@@ -75,7 +75,6 @@ export const BookSearchBar = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-
           {
             // @ts-expect-error fieldsRequired is a test function on yup shema
             errors.fieldsRequired && (
@@ -85,9 +84,11 @@ export const BookSearchBar = () => {
               >
                 {
                   // @ts-expect-error fieldsRequired is a test function on yup shema
-                  errors.fieldsRequired}
+                  errors.fieldsRequired
+                }
               </div>
-            )}
+            )
+          }
           <Button
             type="submit"
             disabled={status === "pending"}

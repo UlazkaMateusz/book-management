@@ -31,7 +31,7 @@ export const BookDetailPage = () => {
 
 const isDataLoaded = (
   isLoading: boolean,
-  _data: BookDetailsResponse | undefined
+  _data: BookDetailsResponse | undefined,
 ): _data is BookDetailsResponse => {
   return !isLoading;
 };

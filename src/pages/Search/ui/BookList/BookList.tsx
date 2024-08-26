@@ -23,8 +23,10 @@ export const BookList = () => {
 
   return (
     <>
-      <div>Found: {data.numFound}
-        books</div>
+      <div>
+        Found: {data.numFound}
+        books
+      </div>
       <Table bordered hover>
         <thead>
           <tr>

@@ -6,7 +6,7 @@ export const PersonalRatingSchema = Yup.object().shape({
     .test(
       "length",
       "Must be at least 3 characters",
-      (val) => !val || val?.length > 3
+      (val) => !val || val?.length > 3,
     ),
   readingProgress: Yup.string()
     .optional()
