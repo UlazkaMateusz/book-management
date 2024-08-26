@@ -15,7 +15,7 @@ export const BookSearchSchema = Yup.object()
         "At least one field is required", //Message
         "null",
         "fieldsRequired",
-        "required" //type
+        "required", //type
       );
     }
     return true;

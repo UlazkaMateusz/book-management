@@ -75,14 +75,19 @@ export const BookSearchBar = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          {errors.fieldsRequired && (
-            <div
-              className="mt-1"
-              style={{ color: "var(--bs-form-invalid-color)" }}
-            >
-              {errors.fieldsRequired}
-            </div>
-          )}
+
+          {
+            // @ts-expect-error fieldsRequired is a test function on yup shema
+            errors.fieldsRequired && (
+              <div
+                className="mt-1"
+                style={{ color: "var(--bs-form-invalid-color)" }}
+              >
+                {
+                  // @ts-expect-error fieldsRequired is a test function on yup shema
+                  errors.fieldsRequired}
+              </div>
+            )}
           <Button
             type="submit"
             disabled={status === "pending"}

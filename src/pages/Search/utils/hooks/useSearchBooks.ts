@@ -19,13 +19,13 @@ export const useSearchBooks = () => {
 
   const action = useCallback(
     (payload: SearchParams) => setSearchParams(payload),
-    []
+    [],
   );
 
   const [params, setParams] = useReduxSearchParams(
     (state) => state.bookSearch.searchParams,
     action,
-    searchBooksFromUrlParams
+    searchBooksFromUrlParams,
   );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const useSearchBooks = () => {
           title: params.title,
           year: params.year,
         },
-        true
+        true,
       );
     }
   }, [params, fetchSearchData]);
