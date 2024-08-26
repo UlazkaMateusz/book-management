@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from "react";
-import { useLazySearchBooksQuery } from "../../../../api/bookApi";
-import { RenderingError } from "../../../../types/RenderingError";
-import { useReduxSearchParams } from "../../../../hooks/useReduxSearchParams";
-import { SearchParams } from "../../../../entities/bookSearch/types/SearchParams";
-import { setSearchParams } from "../../../../entities/bookSearch/bookSearchSlice";
+import { useLazySearchBooksQuery } from "@/api/bookApi";
+import { RenderingError } from "@/types/RenderingError";
+import { useReduxSearchParams } from "@/hooks/useReduxSearchParams";
+import { SearchParams } from "@/entities/bookSearch/types/SearchParams";
+import { setSearchParams } from "@/entities/bookSearch/bookSearchSlice";
 
 const searchBooksFromUrlParams = (urlParams: URLSearchParams): SearchParams => {
   const year = urlParams.get("year");

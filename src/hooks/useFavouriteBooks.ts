@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FavouriteBookStorageType } from "../types/FavouriteBookStorageType";
+import { FavouriteBookStorageType } from "@/types/FavouriteBookStorageType";
 
 const favouriteBooksLocalStorageKey = "favouriteBooks";
 

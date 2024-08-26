@@ -1,7 +1,7 @@
 import { Card, Placeholder } from "react-bootstrap";
-import { useBookDetailsQuery } from "../../../../api/bookApi";
+import { useBookDetailsQuery } from "@/api/bookApi";
 import { useState } from "react";
-import { CenteredSpinner } from "../../../../shared/CenteredSpinner";
+import { CenteredSpinner } from "@/shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
 
 export interface BookCardProps {

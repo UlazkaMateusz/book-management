@@ -1,6 +1,6 @@
-import { BookStorageType } from "../../../types/BookStorageType";
-import { FavouriteBookStorageType } from "../../../types/FavouriteBookStorageType";
-import { BookFilterValues } from "../ui/BookFilter/BookFilter";
+import { BookStorageType } from "@/types/BookStorageType";
+import { FavouriteBookStorageType } from "@/types/FavouriteBookStorageType";
+import { BookFilterValues } from "@/pages/MyBooks/ui/BookFilter/BookFilter";
 
 export const isBookFilteredOut = (
   book: FavouriteBookStorageType,

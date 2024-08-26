@@ -1,4 +1,4 @@
-import { BookSearchResponse } from "../../../api/types";
+import { BookSearchResponse } from "@/api/types";
 import { SearchParams } from "./SearchParams";
 
 export interface BookSearchState {

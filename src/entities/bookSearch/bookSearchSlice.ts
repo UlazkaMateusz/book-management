@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BookSearchResponse } from "../../api/types";
-import { BookSearchState } from "./types/BookSearchState";
-import { SearchParams } from "./types/SearchParams";
+import { BookSearchResponse } from "@/api/types";
+import { BookSearchState } from "@/entities/bookSearch/types/BookSearchState";
+import { SearchParams } from "@/entities/bookSearch/types/SearchParams";
 
 const initialState: BookSearchState = {
   isFetching: false,

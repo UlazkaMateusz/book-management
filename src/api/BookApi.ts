@@ -3,11 +3,11 @@ import {
   AuthorDetailsResponse,
   BookDetailsResponse,
   BookSearchResponse,
-} from "./types";
+} from "@/api/types";
 import {
   setBookSearchData,
   setBookSearchFetching,
-} from "../entities/bookSearch/bookSearchSlice";
+} from "@/entities/bookSearch/bookSearchSlice";
 
 interface SearchBooksQuery {
   title?: string;
@@ -23,19 +23,22 @@ export const bookApi = createApi({
   endpoints: (builder) => ({
     searchBooks: builder.query<BookSearchResponse, SearchBooksQuery>({
       query: ({ title, author, year }) => {
-        const urlParts = [];
+        const urlSearchParams = new URLSearchParams();
 
         if (title) {
-          urlParts.push(`title=${title}`);
+          urlSearchParams.append("title", title);
         }
         if (author) {
-          urlParts.push(`author=${author}`);
+          urlSearchParams.append("author", author);
         }
         if (year) {
-          urlParts.push(`q=first_publish_year:[${year} TO ${year}]`);
+          urlSearchParams.append(
+            "q",
+            `first_publish_year:[${year} TO ${year}]`,
+          );
         }
 
-        return "search.json?" + urlParts.join("&");
+        return "search.json?" + urlSearchParams.toString();
       },
 
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {

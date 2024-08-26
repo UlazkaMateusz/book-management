@@ -1,9 +1,9 @@
 import { Col, Container, Placeholder, Row } from "react-bootstrap";
 import { useEffect } from "react";
-import { BookDetailsResponse } from "../../../../api/types";
-import { useGetAuthorsDetails } from "../../utils/hooks/useGetAuthorsDetails";
-import { FavouriteBookButton } from "../FavouriteBookButton/FavouriteBookButton";
-import { ImageWithPlaceholder } from "../../../../features/ImageWithPlaceholder";
+import { BookDetailsResponse } from "@/api/types";
+import { useGetAuthorsDetails } from "@/pages/BookDetails/utils/hooks/useGetAuthorsDetails";
+import { FavouriteBookButton } from "@/pages/BookDetails/ui/FavouriteBookButton/FavouriteBookButton";
+import { ImageWithPlaceholder } from "@/features/ImageWithPlaceholder";
 
 export interface BookDetailsProps {
   bookDetailsResponse: BookDetailsResponse;

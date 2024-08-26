@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BookFilterValues } from "../../pages/MyBooks/ui/BookFilter/BookFilter";
+import { BookFilterValues } from "@/pages/MyBooks/ui/BookFilter/BookFilter";
 
 interface MyBookSearchFiltersState {
   bookFilterValues: BookFilterValues;

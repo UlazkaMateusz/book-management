@@ -1,5 +1,5 @@
-import { BookStorageType } from "../types/BookStorageType";
-import { useLocalStorage } from "./useLocalStorage";
+import { BookStorageType } from "@/types/BookStorageType";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const booksCollectionLocalStorageKey = "booksCollection";
 

@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { CenteredSpinner } from "../../../shared/CenteredSpinner";
-import { BookDetails } from "./BookDetails";
-import { PersonalRating } from "./PersonalRating/PersonalRating";
-import { useBookKeyParam } from "../utils/hooks/useBookKeyParam";
-import { useGetBookDetails } from "../utils/hooks/useGetBookDetails";
-import { BookDetailsResponse } from "../../../api/types";
+import { CenteredSpinner } from "@/shared/CenteredSpinner";
+import { BookDetails } from "@/pages/BookDetails/ui/BookDetails";
+import { PersonalRating } from "@/pages/BookDetails/ui/PersonalRating/PersonalRating";
+import { useBookKeyParam } from "@/pages/BookDetails/utils/hooks/useBookKeyParam";
+import { useGetBookDetails } from "@/pages/BookDetails/utils/hooks/useGetBookDetails";
+import { BookDetailsResponse } from "@/api/types";
 
 export const BookDetailPage = () => {
   const bookKey = useBookKeyParam();

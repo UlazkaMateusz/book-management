@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { setMyBooksFilters } from "../../../../entities/myBooksSearchFilters/myBookSearchFiltersSlice";
-import { useReduxSearchParams } from "../../../../hooks/useReduxSearchParams";
+import { setMyBooksFilters } from "@/entities/myBooksSearchFilters/myBookSearchFiltersSlice";
+import { useReduxSearchParams } from "@/hooks/useReduxSearchParams";
 import { useCallback } from "react";
 
 export interface BookFilterValues {

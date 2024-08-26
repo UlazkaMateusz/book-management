@@ -1,5 +1,5 @@
-import { useBookDetailsQuery } from "../../../../api/bookApi";
-import { RenderingError } from "../../../../types/RenderingError";
+import { useBookDetailsQuery } from "@/api/bookApi";
+import { RenderingError } from "@/types/RenderingError";
 
 export const useGetBookDetails = (bookKey: string) => {
   const { data, error, isLoading, isSuccess } = useBookDetailsQuery(bookKey);

@@ -1,8 +1,8 @@
-import { useBooksCollection } from "../../../../hooks/useBooksCollection";
-import { useFavouriteBooks } from "../../../../hooks/useFavouriteBooks";
-import { isBookFilteredOut } from "../../utils/isBookFiteredOut";
-import { BookCard } from "../BookCard/BookCard";
-import { useAppSelector } from "../../../../hooks/redux";
+import { useBooksCollection } from "@/hooks/useBooksCollection";
+import { useFavouriteBooks } from "@/hooks/useFavouriteBooks";
+import { isBookFilteredOut } from "@/pages/MyBooks/utils/isBookFiteredOut";
+import { useAppSelector } from "@/hooks/redux";
+import { BookCard } from "@/pages/MyBooks/ui/BookCard";
 
 export const BookCardContainer = () => {
   const { books: favouriteBooks } = useFavouriteBooks();

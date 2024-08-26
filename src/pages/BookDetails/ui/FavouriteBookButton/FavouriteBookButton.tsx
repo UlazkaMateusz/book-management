@@ -1,9 +1,9 @@
 import { Button } from "react-bootstrap";
-import { useFavouriteBooks } from "../../../../hooks/useFavouriteBooks";
+import { useFavouriteBooks } from "@/hooks/useFavouriteBooks";
 import {
   AuthorDetailsResponse,
   BookDetailsResponse,
-} from "../../../../api/types";
+} from "@/api/types";
 
 interface FavouriteBookButtonProps {
   bookDetailsResponse: BookDetailsResponse;

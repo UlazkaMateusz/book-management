@@ -1,8 +1,8 @@
 import { Table } from "react-bootstrap";
-import { CenteredSpinner } from "../../../../shared/CenteredSpinner";
+import { CenteredSpinner } from "@/shared/CenteredSpinner";
 import { useNavigate } from "react-router-dom";
-import { Book } from "../../../../api/types";
-import { useAppSelector } from "../../../../hooks/redux";
+import { Book } from "@/api/types";
+import { useAppSelector } from "@/hooks/redux";
 
 export const BookList = () => {
   const navigate = useNavigate();

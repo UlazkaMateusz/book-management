@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CenteredSpinner } from "../../../shared/CenteredSpinner";
+import { CenteredSpinner } from "@/shared/CenteredSpinner";
 
 export interface ImageWithPlaceholderProps {
   src: string;

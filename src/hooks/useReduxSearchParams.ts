@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { RootState } from "../store";
+import { RootState } from "@/store";
 import { useEffect } from "react";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "./redux";

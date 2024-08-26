@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { BookSearchSchema } from "./BookSearchSchema";
-import { useSearchBooks } from "../../utils/hooks/useSearchBooks";
+import { useSearchBooks } from "@/pages/Search/utils/hooks/useSearchBooks";
 
 export interface BookSearchBarValues {
   title?: string;

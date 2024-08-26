@@ -1,8 +1,8 @@
 import { Formik } from "formik";
 import { Button, Form } from "react-bootstrap";
-import { useBooksCollection } from "../../../../hooks/useBooksCollection";
-import { PersonalRatingSchema } from "./PersonalRatingSchema";
-import { BookDetailsResponse } from "../../../../api/types";
+import { useBooksCollection } from "@/hooks/useBooksCollection";
+import { PersonalRatingSchema } from "@/pages/BookDetails/ui/PersonalRating/PersonalRatingSchema";
+import { BookDetailsResponse } from "@/api/types";
 
 interface FormValues {
   notes: string;
@@ -23,10 +23,10 @@ export const PersonalRating = ({
   const initialValues: FormValues = savedBook
     ? savedBook
     : {
-        notes: "",
-        readingProgress: "Unread",
-        rating: "",
-      };
+      notes: "",
+      readingProgress: "Unread",
+      rating: "",
+    };
 
   const onSubmit = (data: FormValues) => {
     if (!bookDetailsResponse.key) {

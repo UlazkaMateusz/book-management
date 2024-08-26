@@ -1,7 +1,7 @@
+import { FallbackRender } from "@/features/FallbackRender";
 import { Nav, Navbar } from "react-bootstrap";
 import { ErrorBoundary } from "react-error-boundary";
 import { Link, Outlet } from "react-router-dom";
-import { FallbackRender } from "../features/FallbackRender";
 
 export const PageTemplate = () => {
   return (
