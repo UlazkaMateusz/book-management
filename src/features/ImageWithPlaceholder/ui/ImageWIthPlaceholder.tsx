@@ -15,7 +15,7 @@ export const ImageWithPlaceholder = ({ src }: ImageWithPlaceholderProps) => {
   return (
     <>
       <div style={{ display: imageLoading ? "block" : "none" }}>
-        <CenteredSpinner></CenteredSpinner>
+        <CenteredSpinner />
       </div>
       <img
         style={{ display: imageLoading ? "none" : "block" }}

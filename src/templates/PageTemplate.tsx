@@ -24,7 +24,7 @@ export const PageTemplate = () => {
 
       <div className="m-3">
         <ErrorBoundary FallbackComponent={FallbackRender}>
-          <Outlet></Outlet>
+          <Outlet />
         </ErrorBoundary>
       </div>
     </>

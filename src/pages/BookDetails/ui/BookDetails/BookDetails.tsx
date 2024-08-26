@@ -32,7 +32,7 @@ export const BookDetails = ({ bookDetailsResponse }: BookDetailsProps) => {
             {authors.length ? (
               authors.map((a) => a.name).join(", ")
             ) : (
-              <Placeholder xs={6}></Placeholder>
+              <Placeholder xs={6} />
             )}
           </Row>
           <Row className="m-1">

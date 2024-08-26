@@ -13,9 +13,7 @@ document.getElementsByTagName("html")[0].dataset.bsTheme = "dark";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <div>
-        <RouterProvider router={router}></RouterProvider>
-      </div>
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>,
 );

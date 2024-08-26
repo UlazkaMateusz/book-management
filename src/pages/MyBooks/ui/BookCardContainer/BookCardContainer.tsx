@@ -23,7 +23,7 @@ export const BookCardContainer = () => {
         <BookCard
           key={favouriteBook.key}
           bookKey={favouriteBook.key}
-        ></BookCard>
+        />
       ))}
     </>
   );

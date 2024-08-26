@@ -34,7 +34,7 @@ export const BookCard = ({ bookKey }: BookCardProps) => {
           alignItems: "center",
         }}
       >
-        <CenteredSpinner></CenteredSpinner>
+        <CenteredSpinner />
       </div>
       <Card.Img
         style={{ display: isImageLoading ? "none" : "block" }}
@@ -45,7 +45,7 @@ export const BookCard = ({ bookKey }: BookCardProps) => {
       <Card.Body>
         {isLoading ? (
           <Placeholder as={Card.Title} animation="glow">
-            <Placeholder xs={12}></Placeholder>
+            <Placeholder xs={12} />
           </Placeholder>
         ) : (
           <Card.Title>{data?.title}</Card.Title>

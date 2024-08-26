@@ -13,13 +13,13 @@ export const BookDetailPage = () => {
   const { data, isLoading } = useGetBookDetails(bookKey);
 
   if (!isDataLoaded(isLoading, data)) {
-    return <CenteredSpinner></CenteredSpinner>;
+    return <CenteredSpinner />;
   }
 
   return (
     <>
-      <BookDetails bookDetailsResponse={data}></BookDetails>
-      <PersonalRating bookDetailsResponse={data}></PersonalRating>
+      <BookDetails bookDetailsResponse={data} />
+      <PersonalRating bookDetailsResponse={data} />
       <Button variant="secondary">
         <NavLink to={"/"} style={{ textDecoration: "none", color: "inherit" }}>
           Go to search

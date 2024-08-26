@@ -10,11 +10,11 @@ export const BookList = () => {
   const { data, isFetching } = useAppSelector((state) => state.bookSearch);
 
   if (isFetching) {
-    return <CenteredSpinner></CenteredSpinner>;
+    return <CenteredSpinner />;
   }
 
   if (!data) {
-    return <div></div>;
+    return <div />;
   }
 
   const handleOnClick = (book: Book) => {
